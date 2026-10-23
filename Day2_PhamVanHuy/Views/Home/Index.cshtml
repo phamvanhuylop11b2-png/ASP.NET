@@ -1,0 +1,31 @@
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<h2>1. Demo ViewComponent & Partial View</h2>
+<hr />
+
+<!-- Gọi Partial View -->
+<partial name="_StudentInfoPartial" />
+
+<!-- Gọi ViewComponent -->
+<vc:student-stats title="Thống kê học tập"></vc:student-stats>
+
+<br />
+
+<h2>2. Demo Conventional Routing & Attributed Routing</h2>
+<hr />
+
+<p>
+    <strong>Conventional Routing:</strong> 
+    <a href="/Hello/Welcome?name=PhamVanHuy&ID=10">/Hello/Welcome?name=PhamVanHuy&ID=10</a>
+</p>
+
+<p>
+    <strong>Attributed Routing:</strong> 
+    <a href="/chao-mung/PhamVanHuy/10">/chao-mung/PhamVanHuy/10</a>
+</p>
+
+<p>
+    <em>(Hoặc xem trang tổng hợp: <a href="/sinh-vien">/sinh-vien</a>)</em>
+</p>

@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Attributed Routing";
+}
+
+<h2>Attributed Routing</h2>
+<hr />
+<p>Trang này được định tuyến trực tiếp bằng thuộc tính <code>[Route("chi-tiet-sinh-vien/{id:int}")]</code> trên Action method.</p>
+<p>ID nhận được từ URL: <strong>@ViewBag.StudentId</strong></p>
+
+<br />
+<p>
+    Quay lại: 
+    <a href="/sinh-vien">Conventional Routing (/sinh-vien)</a>
+</p>

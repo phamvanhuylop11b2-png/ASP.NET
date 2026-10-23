@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "Yêu cầu 2: Routing";
+}
+
+<h2>Yêu cầu 2: Conventional Routing & Attributed Routing</h2>
+<hr />
+
+<!-- 1. Conventional Routing -->
+<div style="border: 1px solid #ccc; padding: 15px; margin-bottom: 20px;">
+    <h4>1. Conventional Routing (Định tuyến quy ước)</h4>
+    <p>- Định tuyến thông qua quy ước cấu hình trong <strong>Program.cs</strong>.</p>
+    <p>- URL: <code>/Hello/Welcome?name=PhamVanHuy&ID=10</code></p>
+    <a href="/Hello/Welcome?name=PhamVanHuy&ID=10" class="btn btn-primary">
+        Bấm chạy Conventional Routing &rarr; (Ra 10 dòng PhamVanHuy)
+    </a>
+</div>
+
+<!-- 2. Attributed Routing -->
+<div style="border: 1px solid #ccc; padding: 15px; margin-bottom: 20px;">
+    <h4>2. Attributed Routing (Định tuyến thuộc tính)</h4>
+    <p>- Định tuyến trực tiếp bằng thuộc tính <code>[Route("chao-mung/{name}/{ID:int}")]</code> trên Action.</p>
+    <p>- URL: <code>/chao-mung/PhamVanHuy/10</code></p>
+    <a href="/chao-mung/PhamVanHuy/10" class="btn btn-success">
+        Bấm chạy Attributed Routing &rarr; (Ra 10 dòng PhamVanHuy)
+    </a>
+</div>

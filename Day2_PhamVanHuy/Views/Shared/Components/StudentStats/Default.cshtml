@@ -1,0 +1,11 @@
+@model dynamic
+
+@* ViewComponent: Views/Shared/Components/StudentStats/Default.cshtml *@
+<div style="border: 1px solid #ccc; padding: 15px; margin-bottom: 15px;">
+    <h4>@Model.Title (ViewComponent)</h4>
+    <ul>
+        <li>Tín chỉ tích lũy: <strong>@Model.TotalCredits</strong></li>
+        <li>Điểm GPA: <strong>@Model.Gpa</strong></li>
+        <li>Trạng thái: <strong>@Model.Status</strong></li>
+    </ul>
+</div>
