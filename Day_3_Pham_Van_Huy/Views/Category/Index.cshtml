@@ -2,49 +2,131 @@
 
 @{
     ViewData["Title"] = "Index";
+    int pageNumber = ViewBag.PageNumber ?? 1;
+    int totalPages = ViewBag.TotalPages ?? 1;
+    bool hasPreviousPage = ViewBag.HasPreviousPage ?? false;
+    bool hasNextPage = ViewBag.HasNextPage ?? false;
+    string currentSort = ViewBag.CurrentSort as string ?? "";
+    string searchString = ViewBag.SearchString as string ?? "";
 }
 
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-controller="Category" asp-action="Create">Create New</a>
 </p>
+
+<!-- TÌM KIẾM ĐƠN GIẢN -->
+<form asp-controller="Category" asp-action="Index" method="get">
+    <input type="hidden" name="sortOrder" value="@currentSort" />
+    <p>
+        Tìm kiếm: <input type="text" name="searchString" value="@searchString" />
+        <input type="submit" value="Tìm kiếm" /> |
+        <a asp-controller="Category" asp-action="Index">Tất cả</a>
+    </p>
+</form>
+
+<!-- BẢNG DANH SÁCH VỚI PRICE VÀ CATEGORY (THAY CHO DESCRIPTION) -->
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                <a asp-controller="Category" asp-action="Index" asp-route-sortOrder="@ViewBag.IdSortParm" asp-route-searchString="@searchString">
+                    Id
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                <a asp-controller="Category" asp-action="Index" asp-route-sortOrder="@ViewBag.NameSortParm" asp-route-searchString="@searchString">
+                    Name
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                <a asp-controller="Category" asp-action="Index" asp-route-sortOrder="@ViewBag.PriceSortParm" asp-route-searchString="@searchString">
+                    Price
+                </a>
+            </th>
+            <th>
+                <a asp-controller="Category" asp-action="Index" asp-route-sortOrder="@ViewBag.CategorySortParm" asp-route-searchString="@searchString">
+                    Category
+                </a>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@if (Model != null)
+@if (Model != null && Model.Any())
 {
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(model => item.Id)
+                @item.Id
             </td>
             <td>
-                @Html.DisplayFor(model => item.Name)
+                @item.Name
             </td>
             <td>
-                @Html.DisplayFor(model => item.Description)
+                @item.Price.ToString("N0")
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @item.CategoryName
+            </td>
+            <td>
+                <a asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-controller="Category" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-controller="Category" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
     }
 }
+else
+{
+    <tr>
+        <td colspan="5">Không tìm thấy dữ liệu.</td>
+    </tr>
+}
     </tbody>
 </table>
+
+<!-- PHÂN TRANG ĐƠN GIẢN -->
+<div>
+    Trang @pageNumber / @totalPages |
+    @if (hasPreviousPage)
+    {
+        <a asp-controller="Category" asp-action="Index" 
+           asp-route-pageNumber="@(pageNumber - 1)" 
+           asp-route-sortOrder="@currentSort" 
+           asp-route-searchString="@searchString">Trước</a>
+    }
+    else
+    {
+        <span>Trước</span>
+    }
+    |
+    @for (int i = 1; i <= totalPages; i++)
+    {
+        if (i == pageNumber)
+        {
+            <span><strong>@i</strong></span>
+        }
+        else
+        {
+            <a asp-controller="Category" asp-action="Index" 
+               asp-route-pageNumber="@i" 
+               asp-route-sortOrder="@currentSort" 
+               asp-route-searchString="@searchString">@i</a>
+        }
+        <span> </span>
+    }
+    |
+    @if (hasNextPage)
+    {
+        <a asp-controller="Category" asp-action="Index" 
+           asp-route-pageNumber="@(pageNumber + 1)" 
+           asp-route-sortOrder="@currentSort" 
+           asp-route-searchString="@searchString">Sau</a>
+    }
+    else
+    {
+        <span>Sau</span>
+    }
+</div>

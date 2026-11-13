@@ -23,10 +23,16 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.Price)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Description)
+            @Model.Price.ToString("N0")
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CategoryName)
         </dd>
     </dl>
 </div>
