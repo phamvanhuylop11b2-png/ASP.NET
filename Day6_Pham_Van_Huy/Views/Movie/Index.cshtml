@@ -1,0 +1,40 @@
+@model IEnumerable<Day6_Pham_Van_Huy.Models.Movie>
+
+@{
+    ViewData["Title"] = "Movie";
+}
+
+<h1>Movie</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">+ Create New</a>
+</p>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Genre</th>
+            <th>Duration</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Title</td>
+            <td>@item.ReleaseDate.ToString("yyyy")</td>
+            <td>@item.Genre?.Name</td>
+            <td>@item.Duration</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+

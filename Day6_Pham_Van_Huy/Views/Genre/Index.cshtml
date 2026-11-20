@@ -1,0 +1,32 @@
+@model IEnumerable<Day6_Pham_Van_Huy.Models.Genre>
+
+@{
+    ViewData["Title"] = "Genre List";
+}
+
+<h1>Thể loại (Genre)</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">+ Create New Genre</a>
+</p>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name (Tên thể loại)</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
